@@ -6,7 +6,8 @@ const linkSchema = new Schema({
     required: true // 這是個必填欄位
   },
   code: {
-    type: String
+    type: String,
+    required: true
   }
 })
 module.exports = mongoose.model('Link', linkSchema)

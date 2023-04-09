@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose') // 載入 mongoose
 const exphbs = require('express-handlebars');
+const shortenURL = require('./shortenURL')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -12,6 +13,8 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+
 
 
 // 取得資料庫連線狀態
