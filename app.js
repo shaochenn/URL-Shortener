@@ -37,8 +37,14 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   const originURL = req.body.originURL
   const shortURL = shortenURL()
-  if(!originURL){
 
+  //若短網址存在，則重新generate一個
+  while(Link.findOne({ shortURL }) === 'null') {
+    shortURL = shortenURL()
+  }
+
+  if(!originURL){
+    //若使用者沒有輸入URL，就跳過
   } else {
     Link.findOne({ originURL }) //若使用者輸入相同網址，便回傳相同縮網址
       .lean()
