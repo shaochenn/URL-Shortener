@@ -5,7 +5,6 @@ const shortenURL = require('./shortenURL')
 const bodyParser = require('body-parser')
 const Link = require('./models/link')
 
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -19,7 +18,6 @@ app.use(express.static("public"))
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
-
 // 取得資料庫連線狀態
 const db = mongoose.connection
 // 連線異常
@@ -30,7 +28,6 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
 })
-
 
 // 設定首頁路由
 app.get('/', (req, res) => {
@@ -43,10 +40,10 @@ app.post('/', (req, res) => {
   if(!originURL){
 
   } else {
-    Link.findOne({ originURL })
+    Link.findOne({ originURL }) //若使用者輸入相同網址，便回傳相同縮網址
       .lean()
       .then(link => {
-        return link ? link : Link.create({originURL, shortURL})
+        return link ? link : Link.create({originURL, shortURL}) 
       })
       .then(link => res.render('result', { origin: req.headers.origin, short: link.shortURL }))
       .catch(error => console.error(error))

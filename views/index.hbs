@@ -1,6 +1,9 @@
-<form action="/" method="POST">
+<form class="validation" action="/" method="POST" novalidate>
   <div class="mt-5">
-    <input class="" type="text" placeholder="input URL here" name="originURL">
+    <input class="originInput" type="text" placeholder="input URL here" name="originURL" required>
+    <div class="invalid-feedback">
+      Please provide a valid URL.
+    </div>
     <button type="submit">Shorten</button>
   </div>
 </form>
